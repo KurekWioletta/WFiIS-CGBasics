@@ -113,7 +113,7 @@ void Window::startDrawing()
 	switch (m_selectedAppOption)
 	{
 	case AppOptions::DrawLine:
-		m_drawing->createLine(m_menu.getForegroundColor());
+		m_drawing->createLine(m_menu.getForegroundColor(), m_menu.getBackgroundColor());
 		break;
 	case AppOptions::DrawRectangle:
 		m_drawing->createRectangle(m_menu.getForegroundColor());

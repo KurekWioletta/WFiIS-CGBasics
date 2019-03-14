@@ -8,8 +8,8 @@ Drawing::Drawing(float x, float y)
 
 Drawing::~Drawing()
 {
-	for (int i = 0; i < m_savedShapes.size(); i++)
-		delete m_savedShapes.at(i);
+	for (sf::Drawable* shape : m_savedShapes)
+		delete shape;
 	m_savedShapes.clear();
 }
 
@@ -20,8 +20,8 @@ void Drawing::refresh()
 	m_renderTexture.draw(sf::Sprite(m_texture));
 	
 	// draw previous shapes
-	for (int i = 0; i < m_savedShapes.size(); i++)
-		m_renderTexture.draw(*(m_savedShapes.at(i)));
+	for (sf::Drawable* shape: m_savedShapes)
+		m_renderTexture.draw(*shape);
 
 	// draw new shape
 	if (m_shape != nullptr)
@@ -47,14 +47,14 @@ void Drawing::setShapeEndPoint(float x, float y)
 	m_shapeEndPoint = sf::Vector2f(x, y);
 }
 
-void Drawing::createLine(sf::Color& color)
+void Drawing::createLine(sf::Color& fgColor, sf::Color bgColor)
 {
 	sf::VertexArray* line = new sf::VertexArray(sf::LinesStrip, 2);
 	(*line)[0].position = m_shapeBeginPoint;
 	(*line)[1].position = m_shapeBeginPoint;
 	
-	(*line)[0].color = color;
-	(*line)[1].color = color;
+	(*line)[0].color = fgColor;
+	(*line)[1].color = bgColor;
 
 	m_shape = line;
 } 
@@ -138,6 +138,7 @@ void Drawing::finishShape()
 
 void Drawing::loadFromFile()
 {
+	clearDrawing();
 	m_texture.loadFromFile("example.png"); 
 	m_texture.setSmooth(true);
 }
@@ -145,4 +146,12 @@ void Drawing::loadFromFile()
 void Drawing::saveToFile()
 {
 	m_renderTexture.getTexture().copyToImage().saveToFile("example.png");
+}
+
+void Drawing::clearDrawing()
+{
+	for (int i = 0; i < m_savedShapes.size(); i++)
+		m_savedShapes.pop_back();
+	m_savedShapes.clear();
+	m_shape = nullptr;
 }

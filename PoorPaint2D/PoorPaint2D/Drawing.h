@@ -11,8 +11,8 @@ public:
 	sf::Sprite getDrawing(float x, float y);
 	void setShapeBeginPoint(float x, float y);
 	void setShapeEndPoint(float x, float y);
-	void createLine(sf::Color& color);
 	void createCircle(sf::Color& color);
+	void createLine(sf::Color& fgColor, sf::Color bgColor = sf::Color::Transparent);
 	void createRectangle(sf::Color& fgColor, sf::Color bgColor = sf::Color::Transparent);
 	void updateLine();
 	void updateRectangle();
@@ -20,6 +20,7 @@ public:
 	void finishShape();
 	void loadFromFile();
 	void saveToFile();
+	void clearDrawing();
 private:
 	const unsigned int RENDER_SIZE_X = 700;
 	const unsigned int RENDER_SIZE_Y = 600;
