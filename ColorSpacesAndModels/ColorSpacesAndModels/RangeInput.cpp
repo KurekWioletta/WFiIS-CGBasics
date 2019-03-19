@@ -17,13 +17,13 @@ RangeInput::RangeInput(float x, float y)
 			draw_to_color_pixels(i, j, j);
 		}
 	}
-	m_inputTexture = new sf::Texture();
-	m_inputTexture->create(m_inputSizeX, m_inputSizeY);
-	m_inputTexture->update(m_colorPixels);
+	//m_inputTexture = new sf::Texture();
+	m_inputTexture.create(m_inputSizeX, m_inputSizeY);
+	m_inputTexture.update(m_colorPixels);
 
 	// create container
 	m_rectangleInput = new sf::RectangleShape(sf::Vector2f(30, 255));
-	m_rectangleInput->setTexture(m_inputTexture);
+	m_rectangleInput->setTexture(&m_inputTexture);
 	m_rectangleInput->setPosition(x, y);
 	m_rectangleInput->setOutlineColor(sf::Color::Black);
 	m_rectangleInput->setOutlineThickness(-1.0f);
@@ -42,10 +42,10 @@ RangeInput::RangeInput(float x, float y)
 RangeInput::~RangeInput()
 {
 	delete m_colorPixels;
-	delete m_inputTexture;
 	delete m_rectangleInput;
 	delete m_linePointers[0];
 	delete m_linePointers[1];
+	m_rangeInputElements.clear();
 }
 
 void RangeInput::updatePosition(float y)

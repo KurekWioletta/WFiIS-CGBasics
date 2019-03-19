@@ -26,7 +26,7 @@ private:
 	std::vector<sf::Drawable*> m_rangeInputElements;
 
 	sf::Uint8* m_colorPixels;
-	sf::Texture* m_inputTexture;
+	sf::Texture m_inputTexture;
 
 	int const m_inputSizeX = 30;
 	int const m_inputSizeY = 255;
