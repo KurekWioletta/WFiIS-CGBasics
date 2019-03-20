@@ -1,4 +1,4 @@
-#include "RangeInput.h"
+﻿#include "RangeInput.h"
 
 float RangeInput::m_selectedValue = 0.5;
 
@@ -22,7 +22,7 @@ RangeInput::RangeInput(float x, float y)
 	m_inputTexture.update(m_colorPixels);
 
 	// create container
-	m_rectangleInput = new sf::RectangleShape(sf::Vector2f(30, 255));
+	m_rectangleInput = new sf::RectangleShape(sf::Vector2f(30, 255)); // wcześniej było 250
 	m_rectangleInput->setTexture(&m_inputTexture);
 	m_rectangleInput->setPosition(x, y);
 	m_rectangleInput->setOutlineColor(sf::Color::Black);

@@ -1,4 +1,4 @@
-#include "Text.h"
+﻿#include "Text.h"
 #include "font.h"
 
 Text::Text() : m_lValue(0), m_vValue(0), m_yValue(0), m_bValue(0)
@@ -25,7 +25,7 @@ void Text::setComponentValues()
 	m_lValue = RangeInput::getSelectedValue();
 	m_vValue = RangeInput::getSelectedValue();
 	m_yValue = RangeInput::getSelectedValue() * 100;
-	m_bValue = RangeInput::getSelectedValue() * 250.0f;
+	m_bValue = RangeInput::getSelectedValue() * 255.0f; // wcześniej było 250
 }
 
 void Text::outtextxy(sf::RenderTarget & target, float x, float y, std::string str) const

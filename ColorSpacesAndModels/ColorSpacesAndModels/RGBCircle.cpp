@@ -21,8 +21,9 @@ RGBCircle::RGBCircle(float x, float y) : Circle(x, y)
 
 void RGBCircle::updateTexture()
 {
+	float bValue = RangeInput::getSelectedValue() * 255.0f;
 	for (unsigned i = 0; i < 250; ++i)
 		for (unsigned j = 0; j < 250; ++j)
-			m_colorPixels[4 * (j * 250 + i) + 2] = static_cast<sf::Uint8>(RangeInput::getSelectedValue() * 255.0f);
+			m_colorPixels[4 * (j * 250 + i) + 2] = static_cast<sf::Uint8>(bValue);
 	refresh();
 }
