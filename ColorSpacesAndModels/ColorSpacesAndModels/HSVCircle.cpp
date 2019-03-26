@@ -39,7 +39,7 @@ void HSVCircle::updateTexture()
 
 void HSVCircle::convertToRGB(int x, int y)
 {
-	float region, remainder, p, q, t;
+	float region;
 	int i;
 
 	if (m_HSV[1] <= 0) {
@@ -53,48 +53,11 @@ void HSVCircle::convertToRGB(int x, int y)
 
 	m_i[x][y] = i = static_cast<int>(region);
 
-	remainder = region - i;
-
-	p = m_HSV[2] * (m_p[x][y] = (1.0f - m_HSV[1]));
-	q = m_HSV[2] * (m_q[x][y] = (1.0f - m_HSV[1] * remainder));
-	t = m_HSV[2] * (m_t[x][y] = (1.0f - m_HSV[1] * (1.0f - remainder)));
+	m_p[x][y] = 1.0f - m_HSV[1];
+	m_q[x][y] = 1.0f - m_HSV[1] * (region - i);
+	m_t[x][y] = 1.0f - m_HSV[1] * (1.0f - (region - i));
 	
-	switch (i) {
-	case 0:
-		m_RGB[0] = m_HSV[2]; // R = V
-		m_RGB[1] = t; // G = t
-		m_RGB[2] = p; // B = p
-		break;
-	case 1:
-		m_RGB[0] = q; // R = q
-		m_RGB[1] = m_HSV[2]; // G = V
-		m_RGB[2] = p; // B = p
-		break;
-	case 2:
-		m_RGB[0] = p; // R = p
-		m_RGB[1] = m_HSV[2]; // G = V
-		m_RGB[2] = t; // B = t
-		break;
-	case 3:
-		m_RGB[0] = p; // R = p
-		m_RGB[1] = q; // G = q
-		m_RGB[2] = m_HSV[2]; // B = V
-		break;
-	case 4:
-		m_RGB[0] = t; // R = t
-		m_RGB[1] = p; // G = p
-		m_RGB[2] = m_HSV[2]; // B = V
-		break;
-	default:
-		m_RGB[0] = m_HSV[2]; // R = V
-		m_RGB[1] = p; // G = p
-		m_RGB[2] = q; // B = q
-		break;
-	}
-
-	m_RGB[0] *= 255.0f;
-	m_RGB[1] *= 255.0f;
-	m_RGB[2] *= 255.0f;
+	updateRGB(x, y);
 }
 
 void HSVCircle::updateRGB(int x, int y)
