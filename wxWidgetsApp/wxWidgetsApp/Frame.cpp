@@ -19,7 +19,6 @@ Frame::~Frame()
 	delete m_gaugeArmAngle;
 	delete m_choiceImgPick;
 	delete m_textCtrl;
-
 	delete m_panelDrawing;
 }
 
@@ -122,13 +121,15 @@ void Frame::onUpdate(wxUpdateUIEvent & event)
 
 void Frame::onButtonSaveDrawingClick(wxCommandEvent & e)
 {
+
 	wxFileDialog saveFileDialog(this, "Save as", "", "", "BMP files (*.bmp)|*.bmp|JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
 		return; 
-	m_image = m_bitmapBanana.ConvertToImage();
-	m_image.AddHandler(new wxJPEGHandler);
-	m_image.AddHandler(new wxPNGHandler);
-	m_image.SaveFile(saveFileDialog.GetPath());
+
+	wxImage image = m_bitmapSavedImg.ConvertToImage();
+	image.AddHandler(new wxJPEGHandler);
+	image.AddHandler(new wxPNGHandler);
+	image.SaveFile(saveFileDialog.GetPath());
 }
 
 void Frame::onButtonColorPickClick(wxCommandEvent & e)
@@ -156,8 +157,9 @@ void Frame::onChoiceSelected(wxCommandEvent & e)
 }
 
 void Frame::draw(wxClientDC &dcClient)
-{	
-	wxBufferedDC dcBuffer(&dcClient);
+{
+	m_bitmapSavedImg = wxBitmap(m_panelDrawing->GetSize().x, m_panelDrawing->GetSize().y);
+	wxBufferedDC dcBuffer(&dcClient, m_bitmapSavedImg);
 	PrepareDC(dcBuffer);
 
 	dcBuffer.Clear();

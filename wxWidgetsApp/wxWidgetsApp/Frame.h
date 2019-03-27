@@ -39,8 +39,8 @@ private:
 
 	wxString m_text;
 	wxBitmap m_bitmapBanana;
+	wxBitmap m_bitmapSavedImg;
 	wxColour m_color;
-	wxImage m_image;
 
 	enum {
 		ID_WXBUTTON_SAVE_DRAWING = 1001,
