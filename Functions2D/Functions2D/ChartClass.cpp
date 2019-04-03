@@ -192,39 +192,6 @@ void ChartClass::DrawChartAxis(Matrix matrix, wxDC* dc, int h)
 
 	dc->DrawRotatedText(wxString::Format(wxT("%.2f"), Get_Y_max() / 2.0), wxPoint(oyP.GetX(), h - oyP.GetY()), cfg->Get_Alpha());
 	dc->DrawRotatedText(wxString::Format(wxT("%.2f"), Get_Y_min() / 2.0), wxPoint(oyN.GetX(), h - oyN.GetY()), cfg->Get_Alpha());
-
-
-	/*
-	line2d(dc, matrix, x_min, 0, x_max, 0, h); // X axis
-
-	double deltaX = 1.0 + static_cast<int>((cfg->Get_x1() - cfg->Get_x0()) / 10);
-
-	double diff = (cfg->Get_x1() - cfg->Get_x0()) / 4;
-
-	for (double x = x_min + diff; x < x_max; x += (deltaX / 2)) {
-		if (x == 0 || x >= 2.0) {
-		 vcx	continue;
-		}
-		line2d(dc, matrix, x, -0.05, x, 0.05, h);
-		//drawRotatedText(dc, transformMatrix, wxString::Format(wxT("%.2f"), x), x - 0.001, -0.1, h);
-	}
-
-	line2d(dc, matrix, cfg->Get_x_stop(), 0, cfg->Get_x_stop() - 0.05, 0.05,  h);
-	line2d(dc, matrix, cfg->Get_x_stop(), 0, cfg->Get_x_stop() - 0.05, -0.05, h); //arrow x
-
-	line2d(dc, matrix, 0, y_min, 0, y_max, h);
-	double deltaY = 1.0 + static_cast<int>((cfg->Get_y1() - cfg->Get_y0()) / 20);
-
-	for (double y = y_min; y < y_max; y += (deltaY)) {
-		if (y == 0 || y >= 2.0) {
-			continue;
-		}
-		line2d(dc, matrix, -0.05, y, 0.05, y,h);
-		//drawRotatedText(dc, transformMatrix, wxString::Format(wxT("%.2f"), y), 0.1, y - 0.001, h);
-	}
-
-	line2d(dc, matrix, 0, y_max, 0.05, y_max - 0.05,h);
-	line2d(dc, matrix, 0, y_max, -0.05, y_max - 0.05, h); //arrow y*/
 }
 
 void ChartClass::DrawChartFunction(Matrix matrix, wxDC* dc, int h)
