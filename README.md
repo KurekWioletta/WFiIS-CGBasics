@@ -1,3 +1,3 @@
 # WFiIS-CGBasics
 
-This repository contains tasks realized during Basics of Computer Graphics university course. 
+This repository contains tasks realized during Fundamentals of Computer Graphics university course. 
